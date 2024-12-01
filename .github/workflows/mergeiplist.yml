@@ -1,0 +1,17 @@
+name: Merge IPTV Lists
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs daily at midnight
+
+jobs:
+  merge-lists:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install requests library
+        run: |
+          python -m pip install requests
+      - name: Merge IPTV Lists
+        run: |
+          python merge_iptv_lists.py https://raw.githubusercontent.com/josxha/german-tv-m3u/refs/heads/main/german-tv.m3u https://raw.githubusercontent.com/guenes/iptv/refs/heads/master/streams/tr.m3u detr.m3u
